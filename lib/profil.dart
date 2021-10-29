@@ -104,10 +104,28 @@ class _ProfileState extends State<Profile> {
                                   SizedBox(
                                     height: 6,
                                   ),
-                                  Text(
-                                    'Overall Rating',
-                                    style: TextStyle(
-                                        color: Colors.black54, fontSize: 10),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Overall Rating',
+                                        style: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 10),
+                                      ),
+                                      SizedBox(
+                                        width: 3,
+                                      ),
+                                      Row(
+                                        children: List.generate(
+                                            5,
+                                            (index) => Image.network(
+                                                  "https://cdn-icons-png.flaticon.com/512/59/59178.png",
+                                                  color: Colors.yellow,
+                                                  height: 7,
+                                                  width: 7,
+                                                )),
+                                      )
+                                    ],
                                   ),
                                 ],
                               ),

@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: "/fullpage",
+      initialRoute: "/dilog",
       routes: {
         "/Profile": (context) => Profile(),
         // "/Profile" :(context) =>SampleContainer(),

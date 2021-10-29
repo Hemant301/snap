@@ -85,35 +85,46 @@ class _fullpageState extends State<fullpage> {
   }
 }
 
-class Buttons extends StatelessWidget {
+class Buttons extends StatefulWidget {
   const Buttons({Key? key, this.label, this.active = false}) : super(key: key);
   final String? label;
   final bool active;
 
   @override
+  State<Buttons> createState() => _ButtonsState();
+}
+
+class _ButtonsState extends State<Buttons> {
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Text(
-          "$label",
+          "${widget.label}",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         Container(
           margin: EdgeInsets.only(top: 1),
           height: 2,
           width: 50,
-          color: active ? Colors.black : Colors.white,
+          color: widget.active ? Colors.black : Colors.white,
         )
       ],
     );
   }
 }
 
-class cart extends StatelessWidget {
+class cart extends StatefulWidget {
   const cart({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<cart> createState() => _cartState();
+}
+
+class _cartState extends State<cart> {
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -164,7 +175,7 @@ class cart extends StatelessWidget {
                 ),
                 Text(
                   "Any request for vendors? You can add hare.",
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: Colors.grey, fontSize: 12),
                 )
               ],
             ),
@@ -173,8 +184,8 @@ class cart extends StatelessWidget {
             height: 10,
           ),
           Container(
-            height: 50,
-            color: Colors.yellow[300],
+            height: 40,
+            color: Color(0xfff4f5a8),
             width: MediaQuery.of(context).size.width - 60,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -209,7 +220,7 @@ class cart extends StatelessWidget {
                         style: TextStyle(
                             decoration: TextDecoration.underline,
                             color: Colors.grey[600],
-                            fontSize: 20),
+                            fontSize: 15),
                       ),
                       Row(
                         children: [
@@ -254,6 +265,7 @@ class cart extends StatelessWidget {
                         Icon(
                           Icons.pan_tool,
                           color: Colors.green,
+                          size: 20,
                         ),
                         SizedBox(
                           width: 5,
@@ -303,10 +315,15 @@ class cart extends StatelessWidget {
                       Text('Doorstep Charge'),
                       Text(
                         'Free',
-                        style: TextStyle(color: Colors.purple),
+                        style: TextStyle(
+                          color: Colors.purple,
+                        ),
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 7,
+                  )
                 ],
               ),
             ),
@@ -357,10 +374,13 @@ class cart extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text("Donate for OLD IS GOLD."),
+                      Text(
+                        "Donate for OLD IS GOLD.",
+                        style: TextStyle(fontSize: 13),
+                      ),
                       Text(
                         "remove",
-                        style: TextStyle(color: Colors.red),
+                        style: TextStyle(color: Colors.red, fontSize: 10),
                       ),
                     ],
                   ),
@@ -398,57 +418,305 @@ class cart extends StatelessWidget {
                 SizedBox(
                   height: 15,
                 ),
-                Stack(
-                  children: [
-                    Container(
-                      height: 140,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://image.freepik.com/free-photo/young-woman-with-perfect-natural-makeup-brown-big-lips-green-wall-with-mobile-phone-take-selfie-photographing-herself_343596-6904.jpg"),
-                              fit: BoxFit.cover)),
-                    ),
-                    Positioned(
-                      top: 70,
-                      child: Container(
-                          height: 70,
-                          width: 120,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(
+                      10,
+                      (index) => Row(
+                        children: [
+                          Stack(
                             children: [
-                              Text("Spexial Packeg",
-                                  style: TextStyle(color: Colors.white)),
-                              Text("Discount and offers",
-                                  style: TextStyle(color: Colors.white)),
-                              Text("never Seen befor",
-                                  style: TextStyle(color: Colors.white)),
-                              Text("300/-",
-                                  style: TextStyle(color: Colors.white)),
-                              Container(
-                                height: 20,
-                                width: 40,
-                                child: Row(
-                                  children: [
-                                    Text("Spexial Packeg",
-                                        style: TextStyle(color: Colors.white)),
-                                    Icon(Icons.add)
-                                  ],
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Container(
+                                  height: 140,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              "https://image.freepik.com/free-photo/young-woman-with-perfect-natural-makeup-brown-big-lips-green-wall-with-mobile-phone-take-selfie-photographing-herself_343596-6904.jpg"),
+                                          fit: BoxFit.cover)),
                                 ),
-                              )
+                              ),
+                              Positioned(
+                                top: 70,
+                                left: 10,
+                                child: Container(
+                                    height: 70,
+                                    width: 120,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text("Spexial Packeg",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 10)),
+                                          Text("Discount and offers",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 10)),
+                                          Text("never Seen befor",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 10)),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text("300/-",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15)),
+                                              Container(
+                                                height: 15,
+                                                width: 40,
+                                                color: Colors.white,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text("Add",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 10)),
+                                                      Icon(
+                                                        Icons.add,
+                                                        size: 12,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.black.withOpacity(0.5),
+                                    )),
+                              ),
                             ],
                           ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.black.withOpacity(0.5),
-                          )),
+                        ],
+                      ),
                     ),
-                  ],
+                  ),
                 )
               ],
             ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.note_add_outlined),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                      child: Text(
+                          'Lorem ipsum dolornemo  fficia minus veniam repellendus nesciunt, nemo omnis nostrum quo ',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                          ))),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Icon(Icons.access_alarm),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                      child: Text(
+                          'Lorem ipsum dolornemo  veniam repellendus nesciunt, nemo omnis nostrum quo ',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                          ))),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Icon(Icons.content_paste_off_outlined),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                      child: Text(
+                          'Lorem ipsum dolornemo omnisminus veniam repellendus nesciunt, nemo omnis nostrum quo ',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                          ))),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Icon(Icons.pan_tool),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                      child: Text(
+                          'Lorem ipsum dolornemo omnis  veniam repellendus nesciunt, nemo omnis nostrum quo ',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                          ))),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Icon(Icons.policy),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                      child: Text(
+                          'Lorem ipsum dolornemo  minus veniam repellendus nesciunt, nemo omnis nostrum quo ',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                          ))),
+                ],
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 33, vertical: 5),
+                child: Text(
+                  "Read Policy",
+                  style: TextStyle(color: Colors.red, fontSize: 12),
+                ),
+              )
+            ],
+          ),
+        ),
+        Divider(
+          thickness: 20,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.add_location),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("YOUR'E AT"),
+                    ],
+                  ),
+                  Text(
+                    "CHANGE",
+                    style: TextStyle(color: Colors.orange),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Kushum Vihar Morabadi",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  Checkbox(
+                    checkColor: Colors.white,
+                    // fillColor: MaterialStateProperty.resolveWith(getColor),
+                    value: isChecked,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        isChecked = value!;
+                      });
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Container(
+                      height: 45,
+                      width: MediaQuery.of(context).size.width - 200,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Rs 950.00",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "VIEW DETAILED BILL",
+                                style:
+                                    TextStyle(color: Colors.blue, fontSize: 10),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      color: Colors.grey[300]),
+                  Container(
+                      height: 45,
+                      width: MediaQuery.of(context).size.width - 200,
+                      child: Center(
+                        child: Text(
+                          "MAKE PAYAMANT",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      color: Colors.orange),
+                ],
+              )
+            ],
           ),
         )
       ],
@@ -471,20 +739,35 @@ class plumber extends StatelessWidget {
           width: 60,
           fit: BoxFit.cover,
         ),
-        Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Service Time -8th August @ 04:30',
-                  style: TextStyle(fontSize: 10, color: Colors.grey)),
-              Container(
-                  height: 2,
-                  width: MediaQuery.of(context).size.width - 120,
-                  color: Colors.grey),
-              Text('Plumber',
-                  style: TextStyle(fontSize: 15, color: Colors.grey)),
-              Row(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 5, top: 3),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.add_alarm,
+                    size: 15,
+                    color: Colors.grey,
+                  ),
+                  Text('Service Time -8th August @ 04:30',
+                      style: TextStyle(fontSize: 10, color: Colors.grey)),
+                ],
+              ),
+            ),
+            Container(
+                height: 2,
+                width: MediaQuery.of(context).size.width - 120,
+                color: Colors.grey),
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: Text('Plumber',
+                  style: TextStyle(fontSize: 15, color: Colors.grey[600])),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0),
+              child: Row(
                 children: [
                   Text('Rs 450/-',
                       style: TextStyle(fontSize: 10, color: Colors.grey)),
@@ -494,7 +777,7 @@ class plumber extends StatelessWidget {
                   Container(
                     height: 15,
                     width: 50,
-                    color: Colors.yellow,
+                    color: Color(0xfff4f5a8),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -511,12 +794,16 @@ class plumber extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 0,
-              ),
-              Text('Store', style: TextStyle(fontSize: 10, color: Colors.grey)),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 3,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0),
+              child: Text('Store',
+                  style: TextStyle(fontSize: 10, color: Colors.grey)),
+            ),
+          ],
         ),
       ],
     );
